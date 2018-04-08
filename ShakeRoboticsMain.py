@@ -27,13 +27,31 @@ def respond(inputText, character):
 
 #respond("a", "character")
 
-count = 0
+currentCharacter = "Fran."
+previousLine = "Who's"
+previousLine = "'Tis now"
+charactersShort.remove(currentCharacter)
+nonCharacters = ''.join(charactersShort)
+
+lineNumber = 0
 file = open("Hamlet.txt", "r")
-prevLine = 0
-for line in file:
-    count += 1
-    if "Who's there?" in line:
-        prevLine = count
-    if (prevLine != 0) and ((prevLine + 1) == count):
-        print(line)
+prevLineNumber = 0
+
+for currentLine in file:
+    lineNumber += 1
+    if previousLine in currentLine:
+        prevLineNumber = lineNumber
+    if (prevLineNumber != 0) and ((prevLineNumber + 1) == lineNumber) and (currentCharacter in currentLine):
+        print(currentLine)
+        prevLineNumber = lineNumber
+        #break #comment in for 1 line response
+    elif (prevLineNumber != 0) and ((prevLineNumber + 1) == lineNumber) and \
+            ((currentCharacter in currentLine) or ("Enter" in currentLine)):
         break
+    elif (prevLineNumber != 0) and ((prevLineNumber + 1) == lineNumber) and ((nonCharacters not in currentLine)):
+        print(currentLine)
+        prevLineNumber = lineNumber
+        break
+
+
+
