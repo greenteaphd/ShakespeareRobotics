@@ -1,4 +1,7 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
+# COMP 380 - Robotics Project
+# April 8th, 2019
+
 
 charactersFull = ["Claudius","Hamlet","Polonius","Horatio","Laertes","Voltemand","Cornelius","Rosencrantz",
                   "Guildenstern","Osric","Gentleman","Priest","Marcellus","Bernardo","Francisco","Reynaldo",
