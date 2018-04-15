@@ -18,20 +18,6 @@ lineNumber = 0
 file = open("Hamlet.txt", "r")
 prevLineNumber = 0
 
-def countLineNumbers(fileName):
-    with open(fileName) as f:
-        for i, l in enumerate(f):
-            pass
-        return i + 1
-
-def respond(inputText, character):
-    if len(inputText) == 0:
-        return "" #say nothing
-    else:
-        file = open("Hamlet.txt", "r")
-        oneLine = file.readline()
-        print (oneLine)
-
 def indexAllLines(file):
     allLines = []
     firstWords = []
