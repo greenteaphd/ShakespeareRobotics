@@ -18,5 +18,4 @@ def client_main(server_address):
     s.close()
     return
 
-client_main("169.254.228.234")
-
+client_main("169.254.253.206")

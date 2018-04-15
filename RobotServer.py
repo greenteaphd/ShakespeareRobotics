@@ -27,5 +27,5 @@ def server_main(server_address):
         test_method(data)
         conn.close()
 
-server_main("169.254.228.234")
+server_main("169.254.253.206")
 
