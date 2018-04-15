@@ -32,6 +32,7 @@ def indexAllLines(file):
 allLines, firstWords = indexAllLines(file)
 
 def respond(currentCharacter, previousLine, charactersShort):
+    respondString = ""
     charactersShort.remove(currentCharacter)
     for index1 in range(0, len(allLines)-1):
         currentLine = allLines[index1]
@@ -42,8 +43,10 @@ def respond(currentCharacter, previousLine, charactersShort):
                 if firstWords[index2] not in charactersShort and firstWords[index2] not in otherBadWords:
                     responseLine = allLines[index2]
                     responseLine = ' '.join(responseLine)
-                    print(responseLine)
+                    respondString = respondString + responseLine + "\n"
                 elif firstWords[index2] in charactersShort:
                     break
+    return respondString
 
-respond("Hor.","That was and", charactersShort)
+respondString = respond("Hor.","That was and", charactersShort)
+print(respondString)
