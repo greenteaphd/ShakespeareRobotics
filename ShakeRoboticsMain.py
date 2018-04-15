@@ -12,13 +12,17 @@ charactersShort = ["King","Ham.","Pol.","Hor.","Laer.","Volt.","Cor.","Ros.","Gu
                    "Mar.","Ber.","Fran.","Rey.","1. Play.", "Clown.", "Fort.","Capt.","Ambassador.","Queen.","Oph.",
                    "Ghost.","Lord.","","","","Sailor.","Mess.","Servant."]
 
+otherBadWords = ["Enter", "Scene"]
+
+lineNumber = 0
+file = open("Hamlet.txt", "r")
+prevLineNumber = 0
+
 def countLineNumbers(fileName):
     with open(fileName) as f:
         for i, l in enumerate(f):
             pass
         return i + 1
-
-totalLineNumbers = countLineNumbers("Hamlet.txt")
 
 def respond(inputText, character):
     if len(inputText) == 0:
@@ -28,33 +32,32 @@ def respond(inputText, character):
         oneLine = file.readline()
         print (oneLine)
 
-#respond("a", "character")
+def indexAllLines(file):
+    allLines = []
+    firstWords = []
+    for currentLine in file:
+        words = currentLine.split()
+        if len(words) > 0:
+            firstWord = words[0]
+            firstWords.append(firstWord)
+            allLines.append(words)
+    return allLines, firstWords
 
-currentCharacter = "Fran."
-previousLine = "Who's"
-previousLine = "'Tis now"
-charactersShort.remove(currentCharacter)
-nonCharacters = ''.join(charactersShort)
+allLines, firstWords = indexAllLines(file)
 
-lineNumber = 0
-file = open("Hamlet.txt", "r")
-prevLineNumber = 0
+def respond(currentCharacter, previousLine, charactersShort):
+    charactersShort.remove(currentCharacter)
+    for index1 in range(0, len(allLines)-1):
+        currentLine = allLines[index1]
+        currentLine = ' '.join(currentLine)
+        if previousLine in currentLine:
+            prevLineNumber = index1
+            for index2 in range(prevLineNumber + 1, len(allLines)-1):
+                if firstWords[index2] not in charactersShort and firstWords[index2] not in otherBadWords:
+                    responseLine = allLines[index2]
+                    responseLine = ' '.join(responseLine)
+                    print(responseLine)
+                elif firstWords[index2] in charactersShort:
+                    break
 
-for currentLine in file:
-    lineNumber += 1
-    if previousLine in currentLine:
-        prevLineNumber = lineNumber
-    if (prevLineNumber != 0) and ((prevLineNumber + 1) == lineNumber) and (currentCharacter in currentLine):
-        print(currentLine)
-        prevLineNumber = lineNumber
-        #break #comment in for 1 line response
-    elif (prevLineNumber != 0) and ((prevLineNumber + 1) == lineNumber) and \
-            ((currentCharacter in currentLine) or ("Enter" in currentLine)):
-        break
-    elif (prevLineNumber != 0) and ((prevLineNumber + 1) == lineNumber) and ((nonCharacters not in currentLine)):
-        print(currentLine)
-        prevLineNumber = lineNumber
-        break
-
-
-
+respond("Hor.","That was and", charactersShort)
