@@ -37,7 +37,7 @@ def respond(currentCharacter, previousLine, charactersShort):
     for index1 in range(0, len(allLines)-1):
         currentLine = allLines[index1]
         currentLine = ' '.join(currentLine)
-        if previousLine in currentLine:
+        if previousLine in currentLine.lower():
             prevLineNumber = index1
             for index2 in range(prevLineNumber + 1, len(allLines)-1):
                 if firstWords[index2] not in charactersShort and firstWords[index2] not in otherBadWords:
@@ -48,5 +48,38 @@ def respond(currentCharacter, previousLine, charactersShort):
                     break
     return respondString
 
-respondString = respond("Hor.","That was and", charactersShort)
+respondString = respond("Hor.", "is the question", charactersShort)
 print(respondString)
+
+def getInputSpeech():
+    import speech_recognition as sr
+
+    with open("api-key.json") as f:
+        GOOGLE_CLOUD_SPEECH_CREDENTIALS = f.read()
+
+    # Record Audio
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Say something!")
+        audio = r.listen(source)
+
+    humanInput = ""
+    # Speech recognition using Google Speech Recognition
+    try:
+        humanInput = r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS)
+        print("You said: " + r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS))
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+    if len(humanInput) > 0:
+        humanInput
+    else:
+        humanInput = "Try again"
+    return humanInput
+
+#humanInput = getInputSpeech()
+#print(humanInput)
+#respondString = respond("Hor.", humanInput, charactersShort)
+#print(respondString)
