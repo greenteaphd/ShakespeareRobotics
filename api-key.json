@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "double-willow-197820",
+  "private_key_id": "bf718095b78384607c697c94504050330b4a97f7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWDZdq/Sb+CsUb\neXgnFtBOfXS59HpvdnPFaqBWeEt5bYiP+vykpto1/7m/hQBncs4xAFYkGSRSyBTG\np30aWv70jop70dNEoI5u57sPx9hYE/GWotsczHDVmZvhIECegfgQyj0932umjNoC\nzgq0sjBY/hjkHMEunOOR892yneANiGoF9y1RKKxUKZ211Raa5+ZlI5IxexOcYzvV\n1TdV6spvDmGE3yA5ybXbvUbOUvTSH4Dpjv+nADkFq1bXfpoweSdD+AuSVf18qo1Z\nEkUzEeke3EnHQe+FB313w0hRbBITpLJ66uvCji95OmDrsIjkwkYi43Yi+lK8VdVN\nrVWB160XAgMBAAECggEAYs1qP4mzdl6tRbXHVq+qnhg9iVoGK63u2UiS0ub624VK\nHD97X1re7T7pU7RGD/oHn8mqeUYbpJRTNrD3x3MKLQMge+/Jx2se46VWDH4v59Po\n1yG75uqdCJM7Rup2uVN/l+xp4UXf8EQim1nUyjxXobRD9AMrzmK/jk6U3g4Obd/a\nB1DG0h1epdiSYedKcrjnrv2Z0bwfLBjIRjF3IEJLL+uBcnqlpWzWtFDOXseNfGS8\nwP8ZCHjGqWWL20MjRxgssfryyIu7HzlZcqigeBhwqvY6lrOuxufVDSqHpJ5rJLTB\n4q3bwQlDrlIhyrOyZBTBGzxTbxOOVrh9Eg3k12lC3QKBgQDsUf2BrQsM66JH9hAh\nUp4zhnnRV+eGfsrHxuom5NE6bgmH2vPrpdF0J8ZCHVx/LT6cso/suQop/Vw41SSG\ne2OHYAZr9dxcOkgoD/gVJUNtW2740T15+NSfuoI9ZSsIY6+rJeArtod22B1/1KEX\nuPqaYr6CAdwtY1khNKQ19W84zQKBgQDn4OWTICoFwzIilYFdItrA/8RDpWZ4rBPg\n1VplezR4U+4pt2ylJMMOEz3ma2igjwe73w220BKX/agyh08VaR6lxl6s6iMNGGN7\nTRZrtasrtRVrFfqHRZ+S4fs7QqhK+uHZ+QrQcKfcflDeZFMYmkNcFURFxQKYrK4e\n9KATtfnNcwKBgQC/YFKMvmbxiq0724AKjE6DaYajSq27VFjBWkvrPWhXCh97vovE\nLN+nUkKS7hYnA6vt2AkH6n3ZrU0O1UUkBy59xfzNVyiiI6yljPEZpripCd+fbkt7\nyE/gHnk0YQZtX9U2I5EbtVCUpMWW7MmcXXfMqOSgggMdWpQmeOv2qpDsjQKBgEHk\n51ioC0kX72dklR6iiQfPpzaSCkzAmeWKu+Wa3Y5US5oPRhCoIcYeMbkJTPJTsx7w\nhDUvbBlFPEcfrJmpBcyWUtFQuCVAiQTBI134gmwpSazk0g0e+/oBviNZDfpA0W3g\nF/KkEQ/X1aNdXz/elsXURVKOae55JAIoAlWXoSWBAoGBAN9tiulfLBtrQLs4TBcW\nCLI9TBte6clc+KMhbElMeWpwRTAoTmsJgdD8UzCHrZuUPk1GXrc+7isnP/y1fugL\nCm+L/ICiGDs4WXatKPpnxHMheIJVzGBDGzk8dYbt/ss+BovoXMwNrcJjbOVNGAIg\nryCI5yPBIcjkQUsLErf1YC93\n-----END PRIVATE KEY-----\n",
+  "client_email": "speech-to-text@double-willow-197820.iam.gserviceaccount.com",
+  "client_id": "108749128402754635227",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/speech-to-text%40double-willow-197820.iam.gserviceaccount.com"
+}
