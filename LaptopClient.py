@@ -2,20 +2,22 @@
 # COMP 380 - Robotics Project
 # April 8th, 2019
 
+# Import statements
 import socket
-
 import speech_recognition as sr
 
+# Reading in the Google API key
 with open("api-key.json") as f:
     GOOGLE_CLOUD_SPEECH_CREDENTIALS = f.read()
 
 # Record Audio
 r = sr.Recognizer()
 with sr.Microphone() as source:
-    print("Say something!")
+    print("Please say something!")
     audio = r.listen(source)
 
 humanInput = ""
+
 # Speech recognition using Google Speech Recognition
 try:
     humanInput = r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS)
@@ -26,7 +28,7 @@ except sr.RequestError as e:
     print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
 if len(humanInput) > 0:
-    humanInput
+    pass
 else:
     humanInput = "Try again"
 
@@ -38,8 +40,9 @@ def client_main(server_address):
     data = humanInput
     data = data.encode()
     s.sendall(data)
-    print("SUCCESS!")
+    print("SUCCESS! HOUSTON, WE HAVE CONTACT.")
     s.close()
     return
 
-client_main("169.254.253.206")
+if __name__ == "__main__":
+    client_main("169.254.122.234")
