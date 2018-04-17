@@ -42,7 +42,7 @@ def indexAllLines(file):
     return allLines, firstWords
 
 # respond() is the main part of the algorithm for the robot's response. It returns a string with the lines following
-# a part of a given previous line
+# a part of a given previous line.
 def respond(currentCharacter, previousLine, charactersShort):
     allLines, firstWords = indexAllLines(FILE)
     respondString = ""

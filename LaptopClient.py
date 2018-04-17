@@ -3,6 +3,7 @@
 # April 8th, 2019
 
 import socket
+import ShakeRoboticsMain
 
 import speech_recognition as sr
 
@@ -30,6 +31,8 @@ if len(humanInput) > 0:
 else:
     humanInput = "Try again"
 
+respondString = ShakeRoboticsMain.respond("Hor.", humanInput, ShakeRoboticsMain.CHARACTERS_SHORT)
+print(respondString)
 
 def client_main(server_address):
     """ This method takes in a server address in order to send data to the server. """
