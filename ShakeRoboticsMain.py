@@ -1,14 +1,17 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
 # COMP 380 - Robotics Project
 # April 15th, 2018
+# This is just the program that deals with spitting back the correct lines after a line is spoken.
+# Not related to the networking component.
 
 ###
 # Static variables needed for respond() function
 #   CHARACTERS_FULL is a list of all of the characters in Hamlet and their full names as listed in the Dramatis Personae
-#   CHARACTERS_SHORT is a list of all of the characters in Hamlet and their shortened names as seen throughout the play's script
+#   CHARACTERS_SHORT is a list of all of the characters in Hamlet and their shortened names as seen in the play's script
 #   OTHER_BAD_WORDS is a list of words to ignore when creating a response
 #   FILE is the read-only representation of Hamlet.txt
 ###
+
 CHARACTERS_FULL = ["Claudius", "Hamlet", "Polonius", "Horatio", "Laertes", "Voltemand", "Cornelius", "Rosencrantz",
                   "Guildenstern","Osric","Gentleman","Priest","Marcellus","Bernardo","Francisco","Reynaldo",
                   "Players", "Two Clowns", "Fortinbras", "Norwegian Captain", "English Ambassador", "Gertrude",
@@ -30,7 +33,10 @@ FILE = open("Hamlet.txt", "r")
 # indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
 # representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
 # match up with the ones in Hamlet.txt because it skips over blank lines.
+
+
 def indexAllLines(file):
+    """ NEED COMMENTS HERE """
     allLines = []
     firstWords = []
     for currentLine in file:
@@ -41,9 +47,10 @@ def indexAllLines(file):
             allLines.append(words)
     return allLines, firstWords
 
-# respond() is the main part of the algorithm for the robot's response. It returns a string with the lines following
-# a part of a given previous line.
+
 def respond(currentCharacter, previousLine, charactersShort):
+    """ respond() is the main part of the algorithm for the robot's response.
+    It returns a string with the lines following a part of a given previous line """
     allLines, firstWords = indexAllLines(FILE)
     respondString = ""
     charactersShort.remove(currentCharacter)
