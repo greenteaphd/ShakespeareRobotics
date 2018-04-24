@@ -29,14 +29,10 @@ FILE = open("Hamlet.txt", "r")
 ###
 # Methods used to generate the correct response to a given line in the play
 ###
-
-# indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
-# representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
-# match up with the ones in Hamlet.txt because it skips over blank lines.
-
-
 def indexAllLines(file):
-    """ NEED COMMENTS HERE """
+    """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
+    representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
+    match up with the ones in Hamlet.txt because it skips over blank lines. """
     allLines = []
     firstWords = []
     for currentLine in file:
@@ -57,7 +53,7 @@ def respond(currentCharacter, previousLine, charactersShort):
     for index1 in range(0, len(allLines)-1):
         currentLine = allLines[index1]
         currentLine = ' '.join(currentLine)
-        if previousLine in currentLine.lower():
+        if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
             for index2 in range(prevLineNumber + 1, len(allLines)-1):
                 if firstWords[index2] not in charactersShort and firstWords[index2] not in OTHER_BAD_WORDS:
@@ -68,6 +64,6 @@ def respond(currentCharacter, previousLine, charactersShort):
                     break
     return respondString
 
-
-respondString = respond("Hor.", "is the question", CHARACTERS_SHORT)
+respondString = respond("Ber.","not a mouse",CHARACTERS_SHORT)
 print(respondString)
+
