@@ -57,7 +57,7 @@ def respond(currentCharacter, previousLine, charactersShort):
     for index1 in range(0, len(allLines)-1):
         currentLine = allLines[index1]
         currentLine = ' '.join(currentLine)
-        if previousLine in currentLine.lower():
+        if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
             for index2 in range(prevLineNumber + 1, len(allLines)-1):
                 if firstWords[index2] not in charactersShort and firstWords[index2] not in OTHER_BAD_WORDS:
@@ -69,5 +69,5 @@ def respond(currentCharacter, previousLine, charactersShort):
     return respondString
 
 
-respondString = respond("Hor.", "is the question", CHARACTERS_SHORT)
+respondString = respond("Mar.", "something is rotten in the state of denmark", CHARACTERS_SHORT)
 print(respondString)
