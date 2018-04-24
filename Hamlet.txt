@@ -62,7 +62,7 @@ at his post; then] Bernardo, [who approaches him].
     And I am sick at heart.
   Ber. Have you had quiet guard?
   Fran. Not a mouse stirring.
-  Ber. Well, good night.
+  Ber. Well, goodnight.
     If you do meet Horatio and Marcellus,
     The rivals of my watch, bid them make haste.
 
@@ -71,11 +71,11 @@ at his post; then] Bernardo, [who approaches him].
   Fran. I think I hear them. Stand, ho! Who is there?
   Hor. Friends to this ground.
   Mar. And liegemen to the Dane.
-  Fran. Give you good night.
+  Fran. Give you goodnight.
   Mar. O, farewell, honest soldier.
     Who hath reliev'd you?
   Fran. Bernardo hath my place.
-    Give you good night.                                   Exit.
+    Give you goodnight.                                   Exit.
   Mar. Holla, Bernardo!
   Ber. Say-
     What, is Horatio there ?
@@ -1952,16 +1952,6 @@ to
 
 
 
-<<THIS ELECTRONIC VERSION OF THE COMPLETE WORKS OF WILLIAM
-SHAKESPEARE IS COPYRIGHT 1990-1993 BY WORLD LIBRARY, INC., AND IS
-PROVIDED BY PROJECT GUTENBERG ETEXT OF CARNEGIE MELLON UNIVERSITY
-WITH PERMISSION.  ELECTRONIC AND MACHINE READABLE COPIES MAY BE
-DISTRIBUTED SO LONG AS SUCH COPIES (1) ARE FOR YOUR OR OTHERS
-PERSONAL USE ONLY, AND (2) ARE NOT DISTRIBUTED OR USED
-COMMERCIALLY.  PROHIBITED COMMERCIAL DISTRIBUTION INCLUDES BY ANY
-SERVICE THAT CHARGES FOR DOWNLOAD TIME OR FOR MEMBERSHIP.>>
-
-
 
 ACT III. Scene I.
 Elsinore. A room in the Castle.
@@ -3009,7 +2999,7 @@ coming.
   Queen. O Hamlet, thou hast cleft my heart in twain.
   Ham. O, throw away the worser part of it,
     And live the purer with the other half,
-    Good night- but go not to my uncle's bed.
+    Goodnight- but go not to my uncle's bed.
     Assume a virtue, if you have it not.
     That monster, custom, who all sense doth eat
     Of habits evil, is angel yet in this,
@@ -3020,14 +3010,14 @@ coming.
     To the next abstinence; the next more easy;
     For use almost can change the stamp of nature,
     And either [master] the devil, or throw him out
-    With wondrous potency. Once more, good night;
+    With wondrous potency. Once more, goodnight;
     And when you are desirous to be blest,
     I'll blessing beg of you.- For this same lord,
     I do repent; but heaven hath pleas'd it so,
     To punish me with this, and this with me,
     That I must be their scourge and minister.
     I will bestow him, and will answer well
-    The death I gave him. So again, good night.
+    The death I gave him. So again, goodnight.
     I must be cruel, only to be kind;
     Thus bad begins, and worse remains behind.
     One word more, good lady.
@@ -3065,25 +3055,14 @@ coming.
     When in one line two crafts directly meet.
     This man shall set me packing.
     I'll lug the guts into the neighbour room.-
-    Mother, good night.- Indeed, this counsellor
+    Mother, goodnight.- Indeed, this counsellor
     Is now most still, most secret, and most grave,
     Who was in life a foolish peating knave.
     Come, sir, to draw toward an end with you.
-    Good night, mother.
+    Goodnight, mother.
                   [Exit the Queen. Then] Exit Hamlet, tugging in
                                                        Polonius.
 
-
-
-
-<<THIS ELECTRONIC VERSION OF THE COMPLETE WORKS OF WILLIAM
-SHAKESPEARE IS COPYRIGHT 1990-1993 BY WORLD LIBRARY, INC., AND IS
-PROVIDED BY PROJECT GUTENBERG ETEXT OF CARNEGIE MELLON UNIVERSITY
-WITH PERMISSION.  ELECTRONIC AND MACHINE READABLE COPIES MAY BE
-DISTRIBUTED SO LONG AS SUCH COPIES (1) ARE FOR YOUR OR OTHERS
-PERSONAL USE ONLY, AND (2) ARE NOT DISTRIBUTED OR USED
-COMMERCIALLY.  PROHIBITED COMMERCIAL DISTRIBUTION INCLUDES BY ANY
-SERVICE THAT CHARGES FOR DOWNLOAD TIME OR FOR MEMBERSHIP.>>
 
 
 
@@ -3503,9 +3482,9 @@ what
     choose but weep to think they would lay him i' th' cold
 ground.
     My brother shall know of it; and so I thank you for your good
-    counsel. Come, my coach! Good night, ladies. Good night,
+    counsel. Come, my coach! Goodnight, ladies. Goodnight,
 sweet
-    ladies. Good night, good night.                         Exit
+    ladies. Goodnight, goodnight.                         Exit
   King. Follow her close; give her good watch, I pray you.
                                                  [Exit Horatio.]
 
@@ -3999,16 +3978,6 @@ your
                                                          Exeunt.
 
 
-
-
-<<THIS ELECTRONIC VERSION OF THE COMPLETE WORKS OF WILLIAM
-SHAKESPEARE IS COPYRIGHT 1990-1993 BY WORLD LIBRARY, INC., AND IS
-PROVIDED BY PROJECT GUTENBERG ETEXT OF CARNEGIE MELLON UNIVERSITY
-WITH PERMISSION.  ELECTRONIC AND MACHINE READABLE COPIES MAY BE
-DISTRIBUTED SO LONG AS SUCH COPIES (1) ARE FOR YOUR OR OTHERS
-PERSONAL USE ONLY, AND (2) ARE NOT DISTRIBUTED OR USED
-COMMERCIALLY.  PROHIBITED COMMERCIAL DISTRIBUTION INCLUDES BY ANY
-SERVICE THAT CHARGES FOR DOWNLOAD TIME OR FOR MEMBERSHIP.>>
 
 
 
@@ -4842,7 +4811,7 @@ leaves,
     On Fortinbras. He has my dying voice.
     So tell him, with th' occurrents, more and less,
     Which have solicited- the rest is silence.             Dies.
-  Hor. Now cracks a noble heart. Good night, sweet prince,
+  Hor. Now cracks a noble heart. Goodnight, sweet prince,
     And flights of angels sing thee to thy rest!
                                                  [March within.]
     Why does the drum come hither?
