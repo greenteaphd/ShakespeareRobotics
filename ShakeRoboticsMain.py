@@ -12,6 +12,9 @@
 #   FILE is the read-only representation of Hamlet.txt
 ###
 
+import string
+import speech_recognition as sr
+
 CHARACTERS_FULL = ["Claudius", "Hamlet", "Polonius", "Horatio", "Laertes", "Voltemand", "Cornelius", "Rosencrantz",
                   "Guildenstern","Osric","Gentleman","Priest","Marcellus","Bernardo","Francisco","Reynaldo",
                   "Players", "Two Clowns", "Fortinbras", "Norwegian Captain", "English Ambassador", "Gertrude",
@@ -21,33 +24,62 @@ CHARACTERS_SHORT = ["King", "Ham.", "Pol.", "Hor.", "Laer.", "Volt.", "Cor.", "R
                    "Mar.","Ber.","Fran.","Rey.","1. Play.", "Clown.", "Fort.","Capt.","Ambassador.","Queen.","Oph.",
                    "Ghost.","Lord.","","","","Sailor.","Mess.","Servant."]
 
-OTHER_BAD_WORDS = ["Enter", "Scene"]
+OTHER_BAD_WORDS = ["Enter", "Scene", "Exeunt", "Flourish", "Exit"]
 
-FILE = open("Hamlet.txt", "r")
+FILE_NAME = "Hamlet.txt"
 
+# do not keep opening the file without closing it, try putting a close file after working with the file
+# OR... just read in the file into a string and then work with the string and access that as many times as we like
+
+def removePunctuation(words):
+    newWords = []
+    for word in words:
+        resultString = ""
+        for char in word:
+            if char not in string.punctuation:
+                resultString += char
+        newWords.append(resultString)
+    return newWords
 
 ###
 # Methods used to generate the correct response to a given line in the play
 ###
-def indexAllLines(file):
+def indexMaxAndMinAllLines(fileName):
     """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
     representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
     match up with the ones in Hamlet.txt because it skips over blank lines. """
+    file = open(fileName, "r")
+    lengths = []
     allLines = []
     firstWords = []
     for currentLine in file:
+        if len(currentLine) > 1:
+            length = len(currentLine)
+            lengths.append(length)
         words = currentLine.split()
         if len(words) > 0:
             firstWord = words[0]
             firstWords.append(firstWord)
+            words = removePunctuation(words)
             allLines.append(words)
-    return allLines, firstWords
+    #print(lengths)
+    maxLength = max(lengths)
+    minLength = min(lengths)
+    file.close()
+    return allLines, firstWords, maxLength, minLength
 
+def processHumanSpeech(speech, maxLength, minLength):
+    processedSpeech = speech
+    if len(speech) >= maxLength/2:
+        processedSpeech = speech[-(minLength + 10):]
+    if speech[-1:] == " ":
+        processedSpeech = speech[0:len(speech) - 1]
+    return processedSpeech
 
 def respond(currentCharacter, previousLine, charactersShort):
     """ respond() is the main part of the algorithm for the robot's response.
     It returns a string with the lines following a part of a given previous line """
-    allLines, firstWords = indexAllLines(FILE)
+    allLines, firstWords, maxLength, minLength = indexMaxAndMinAllLines(FILE_NAME)
     respondString = ""
     charactersShort.remove(currentCharacter)
     for index1 in range(0, len(allLines)-1):
@@ -64,6 +96,45 @@ def respond(currentCharacter, previousLine, charactersShort):
                     break
     return respondString
 
-respondString = respond("Ber.","not a mouse",CHARACTERS_SHORT)
-print(respondString)
 
+def recognizeSpeech():
+    """ Function that handles the transcription of audio into text via Google Speech API """
+    # Reading in the Google API key
+    with open("api-key-andy.json") as f:
+        GOOGLE_CLOUD_SPEECH_CREDENTIALS = f.read()
+
+    # Record Audio
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Please say something!")
+        audio = r.listen(source)
+
+    humanInput = ""
+
+    # Speech recognition using Google Speech Recognition
+    try:
+        humanInput = r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS)
+        print("You said: " + r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS))
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+    if len(humanInput) > 0:
+        pass
+    else:
+        humanInput = "Try again"
+
+    return humanInput
+
+
+allLines, firstWords, maxLength, minLength = indexMaxAndMinAllLines(FILE_NAME)
+
+humanInput = recognizeSpeech()
+print("Human input: ", humanInput)
+
+processed = processHumanSpeech(humanInput, maxLength, minLength)
+print("Processed: ", processed)
+
+respondString = respond("Ber.", processed, CHARACTERS_SHORT)
+print(respondString)

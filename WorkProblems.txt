@@ -1,14 +1,14 @@
 Troubles at Work
 
-Enter Nik, Joweina, and Andy.
+Enter Nick, Joweina, and Andy.
 
-Nik. Hello, friends. How are you all today?
-Jo. I am okay. I have had a long day at work.
-Andy. Oh, where do you work?
-Jo. I work for a company as the President.
-Andy. Wow. They must pay you a lot.
-Nik. They certainly don\'92t pay her a little.
-Jo. It is just hard being so important, you know?
-Nik. Actually, not really.
-Andy. Nik, what do you do for work?
-Nik. Okay, bye!
+Nick Hello, friends. How are you all today?
+Jo I am okay. I have had a long day at work.
+Andy Oh, where do you work?
+Jo I work for a company as the President.
+Andy Wow. They must pay you a lot.
+Nick They certainly don't pay her a little.
+Jo It is just hard being so important, you know?
+Nick Actually, not really.
+Andy Nick, what do you do for work?
+Nick Okay, bye!
