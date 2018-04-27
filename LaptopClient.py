@@ -1,14 +1,27 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
 # COMP 380 - Robotics Project
-# April 8th, 2018
+# April 26th, 2018
 
 # Import statements
 import socket
 import speech_recognition as sr
 import string
 
-FILE_NAME = "WorkProblems.txt"
-#FILE_NAME = "Hamlet.txt"
+
+###
+# Global static variables needed for LaptopClient's main to function properly
+#   FILE_NAME is a string representing the name of play
+###
+FILE_NAME1 = "Hamlet.txt"
+FILE_NAME2 = "WorkProblems.txt"
+
+###
+# PLEASE SET UP THE CORRESPONDING STATIC VARIABLES ACCORDING TO WHATEVER PLAY YOU WANT TO WORK WITH!!
+#TODO: could make this based on user input to make it prettier
+###
+
+FILE_NAME = FILE_NAME2
+
 
 
 ###
@@ -46,8 +59,10 @@ def recognizeSpeechWithAPI():
 
     return humanInput
 
-# TO DO: add comment
 def maxAndMinLines(fileName):
+    """ maxAndMinLines() determines the maximum and minimum lengths of lines in the play overall.
+    These numbers will assist processHumanSpeech() cut down the human input into something that
+    the robot's respond() function can work with. """
     file = open(fileName, "r")
     lengths = []
     for currentLine in file:
@@ -59,8 +74,12 @@ def maxAndMinLines(fileName):
     file.close()
     return maxLength, minLength
 
-# TO DO: add comment
 def processHumanSpeech(speech, maxLength, minLength):
+    """ processHumanSpeech() cuts down the human input string if it is too long. It cuts it down
+     based on the minimum length line of the play and pairs down the input to that minimum length
+     from the end of the string. The lengths are different depending on the play. Additionally,
+     processHumanSpeech() also gets rid of the ending whitespace that sometimes tags along with
+     output from the Google Speech API."""
     processedSpeech = speech
     if len(speech) >= maxLength/2:
         if FILE_NAME == "Hamlet.txt":
@@ -71,8 +90,10 @@ def processHumanSpeech(speech, maxLength, minLength):
         processedSpeech = speech[0:len(speech) - 1]
     return processedSpeech
 
-# TO DO: add comment
 def postProcessHumanSpeech(speech):
+    """ postProcessHumanSpeech() gets rid of punctuation in the human input string. Mostly, this comes into
+     play when there are contractions like "don't" in the human speech input. Otherwise, this does nothing. """
+#TODO: fix this so that it only does it if it has an apostrophe in the line
     postProcessed = ""
     for char in speech:
         if char not in string.punctuation:
@@ -86,7 +107,7 @@ def postProcessHumanSpeech(speech):
 #
 # We've established the relationship between the robot and the laptop as a server-client model.
 # The robot is charge of listening to the laptop and whatever data it sends over,
-# while the laptop is in charge of sending that data to the robot.
+# while the laptop is in charge of sending and processing that data to the robot.
 ###
 
 def client_main(server_address):
