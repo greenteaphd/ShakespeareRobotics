@@ -28,9 +28,10 @@ OTHER_BAD_WORDS = ["Enter", "Scene", "Exeunt", "Flourish", "Exit"]
 
 FILE_NAME = "Hamlet.txt"
 
-# do not keep opening the file without closing it, try putting a close file after working with the file
-# OR... just read in the file into a string and then work with the string and access that as many times as we like
 
+###
+# Methods used to generate the correct response to a given line in the play
+###
 def removePunctuation(words):
     newWords = []
     for word in words:
@@ -41,9 +42,6 @@ def removePunctuation(words):
         newWords.append(resultString)
     return newWords
 
-###
-# Methods used to generate the correct response to a given line in the play
-###
 def indexMaxAndMinAllLines(fileName):
     """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
     representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
