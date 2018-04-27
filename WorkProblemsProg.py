@@ -61,7 +61,7 @@ def respond(currentCharacter, previousLine, charactersShort):
         currentLine = ' '.join(currentLine)
         if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
-            for index2 in range(prevLineNumber + 1, len(allLines)-1):
+            for index2 in range(prevLineNumber + 1, len(allLines)):
                 if (firstWords[index2] not in charactersShort) and (firstWords[index2] not in OTHER_BAD_WORDS):
                     responseLine = allLines[index2]
                     responseLine = ' '.join(responseLine)
@@ -69,6 +69,24 @@ def respond(currentCharacter, previousLine, charactersShort):
                 elif firstWords[index2] in charactersShort:
                     break
     return respondString
+
+
+def processHumanSpeech(speech, maxLength, minLength):
+    processedSpeech = speech
+    if len(speech) >= maxLength/2:
+        processedSpeech = speech[-minLength:]
+    if speech[-1:] == " ":
+        processedSpeech = speech[0:len(speech) - 1]
+    return processedSpeech
+
+
+def postProcessHumanSpeech(speech):
+    postProcessed = ""
+    for char in speech:
+        if char not in string.punctuation:
+            postProcessed += char
+    return postProcessed
+
 
 def recognizeSpeech():
     """ Function that handles the transcription of audio into text via Google Speech API """
@@ -82,39 +100,28 @@ def recognizeSpeech():
         print("Please say something!")
         audio = r.listen(source)
 
-    humanInput = ""
+    human_input = ""
 
     # Speech recognition using Google Speech Recognition
     try:
-        humanInput = r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS)
+        human_input = r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS)
         print("You said: " + r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS))
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
     except sr.RequestError as e:
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-    if len(humanInput) > 0:
+    if len(human_input) > 0:
         pass
     else:
-        humanInput = "Try again"
+        human_input = "Try again"
 
-    print("The API picked up: " + humanInput)
-    return humanInput
-
-def processHumanSpeech(speech, maxLength, minLength):
-    processedSpeech = speech
-    if len(speech) >= maxLength/2:
-        processedSpeech = speech[-minLength:]
-    if speech[-1:] == " ":
-        processedSpeech = speech[0:len(speech) - 1]
-    return processedSpeech
+    return human_input
 
 
 maxLength, minLength = maxAndMinLines(FILE_NAME)
 humanInput = recognizeSpeech()
-
 processed = processHumanSpeech(humanInput, maxLength, minLength)
-print(processed)
-
-respondString = respond("Nick", processed, CHARACTERS_SHORT)
+postProcessed = postProcessHumanSpeech(processed)
+respondString = respond("Nick", postProcessed, CHARACTERS_SHORT)
 print(respondString)

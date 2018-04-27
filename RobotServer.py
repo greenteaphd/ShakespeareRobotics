@@ -4,6 +4,7 @@
 
 import socket
 import ev3dev.ev3 as ev3
+import string
 
 ###
 # Static variables needed for respond() function
@@ -22,21 +23,32 @@ CHARACTERS_SHORT = ["King", "Ham.", "Pol.", "Hor.", "Laer.", "Volt.", "Cor.", "R
                    "Mar.","Ber.","Fran.","Rey.","1. Play.", "Clown.", "Fort.","Capt.","Ambassador.","Queen.","Oph.",
                    "Ghost.","Lord.","","","","Sailor.","Mess.","Servant."]
 
-OTHER_BAD_WORDS = ["Enter", "Scene"]
+OTHER_BAD_WORDS = ["Enter", "Scene", "Exeunt", "Flourish", "Exit"]
 
-FILE = open("Hamlet.txt", "r")
+FILE_NAME = "Hamlet.txt"
+#FILE_NAME = "WorkProblems.txt"
 
 
 ###
-# Methods used to generate the correct response to a given line in the play
+# Helper functions used to generate the correct response to a given line in the play
 ###
 
-# indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
-# representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
-# match up with the ones in Hamlet.txt because it skips over blank lines.
+# TO DO: add comment
+def removePunctuation(words):
+    newWords = []
+    for word in words:
+        resultString = ""
+        for char in word:
+            if char not in string.punctuation:
+                resultString += char
+        newWords.append(resultString)
+    return newWords
 
-def indexAllLines(file):
-    """ NEED COMMENTS HERE """
+def indexAllLines(fileName):
+    """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
+    representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
+    match up with the ones in Hamlet.txt because it skips over blank lines. """
+    file = open(fileName, "r")
     allLines = []
     firstWords = []
     for currentLine in file:
@@ -44,16 +56,15 @@ def indexAllLines(file):
         if len(words) > 0:
             firstWord = words[0]
             firstWords.append(firstWord)
+            words = removePunctuation(words)
             allLines.append(words)
+    file.close()
     return allLines, firstWords
 
-# respond() is the main part of the algorithm for the robot's response. It returns a string with the lines following
-# a part of a given previous line
-
-
 def respond(currentCharacter, previousLine, charactersShort):
-    """ NEED COMMENTS HERE """
-    allLines, firstWords = indexAllLines(FILE)
+    """ respond() is the main part of the algorithm for the robot's response. It returns a string with the lines following
+    a part of a given previous line """
+    allLines, firstWords = indexAllLines(FILE_NAME)
     respondString = ""
     charactersShort.remove(currentCharacter)
     for index1 in range(0, len(allLines)-1):
@@ -70,6 +81,16 @@ def respond(currentCharacter, previousLine, charactersShort):
                     break
     return respondString
 
+
+###
+# The following functions detail what RobotServer as a class does. It is responsible
+# for figuring out the correct response/following line given what a human has said.
+# It receives only the human input from the laptop and does all of the thinking in-house.
+#
+# We've established the relationship between the robot and the laptop as a server-client model.
+# The robot is charge of listening to the laptop and whatever data it sends over,
+# while the laptop is in charge of sending that data to the robot.
+###
 
 def test_method(string_input):
     """ Tests the server_main method to see if the data was sent correctly. """
