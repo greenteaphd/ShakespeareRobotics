@@ -1,6 +1,7 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
 # COMP 380 - Robotics Project
 # April 26th, 2018
+# This is the file that sets up the client on the computer which the data is being sent from
 
 # Import statements
 import socket
@@ -12,6 +13,7 @@ import string
 # Global static variables needed for LaptopClient's main to function properly
 #   FILE_NAME is a string representing the name of play
 ###
+
 FILE_NAME1 = "Hamlet.txt"
 FILE_NAME2 = "WorkProblems.txt"
 
@@ -22,11 +24,10 @@ FILE_NAME2 = "WorkProblems.txt"
 
 FILE_NAME = FILE_NAME2
 
-
-
 ###
 # Helper functions used to recognize and process human speech data
 ###
+
 
 def recognizeSpeechWithAPI():
     """ Function that handles the transcription of audio into text via Google Speech API """
@@ -59,6 +60,7 @@ def recognizeSpeechWithAPI():
 
     return humanInput
 
+
 def maxAndMinLines(fileName):
     """ maxAndMinLines() determines the maximum and minimum lengths of lines in the play overall.
     These numbers will assist processHumanSpeech() cut down the human input into something that
@@ -74,6 +76,7 @@ def maxAndMinLines(fileName):
     file.close()
     return maxLength, minLength
 
+
 def processHumanSpeech(speech, maxLength, minLength):
     """ processHumanSpeech() cuts down the human input string if it is too long. It cuts it down
      based on the minimum length line of the play and pairs down the input to that minimum length
@@ -82,7 +85,7 @@ def processHumanSpeech(speech, maxLength, minLength):
      output from the Google Speech API."""
     processedSpeech = speech
     if len(speech) >= maxLength/2:
-        if FILE_NAME == "Hamlet.txt":
+        if FILE_NAME == "WorkProblems.txt":
             processedSpeech = speech[-(minLength + 10):]
         else:
             processedSpeech = speech[-minLength:]
@@ -90,10 +93,11 @@ def processHumanSpeech(speech, maxLength, minLength):
         processedSpeech = speech[0:len(speech) - 1]
     return processedSpeech
 
+
 def postProcessHumanSpeech(speech):
     """ postProcessHumanSpeech() gets rid of punctuation in the human input string. Mostly, this comes into
      play when there are contractions like "don't" in the human speech input. Otherwise, this does nothing. """
-#TODO: fix this so that it only does it if it has an apostrophe in the line
+    #TODO: fix this so that it only does it if it has an apostrophe in the line
     postProcessed = ""
     for char in speech:
         if char not in string.punctuation:
@@ -121,11 +125,11 @@ def client_main(server_address):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((server_address, 7000))
     s.sendall(data)
-    print("SUCCESS! HOUSTON, WE HAVE CONTACT.")
+    print(data)
     s.close()
     return
 
 if __name__ == "__main__":
-    client_main("169.254.85.238")
+    client_main("169.254.55.85")
 
 
