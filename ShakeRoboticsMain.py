@@ -20,9 +20,9 @@ CHARACTERS_FULL = ["Claudius", "Hamlet", "Polonius", "Horatio", "Laertes", "Volt
                   "Players", "Two Clowns", "Fortinbras", "Norwegian Captain", "English Ambassador", "Gertrude",
                   "Ophelia","Ghost of Hamlet's Father","Lord","Lady","Officer","Solider","Sailor","Messenger","Attendant"]
 
-CHARACTERS_SHORT = ["King", "Ham.", "Pol.", "Hor.", "Laer.", "Volt.", "Cor.", "Ros.", "Guil.", "Osr.", "Gent.", "Priest.",
-                   "Mar.","Ber.","Fran.","Rey.","1. Play.", "Clown.", "Fort.","Capt.","Ambassador.","Queen.","Oph.",
-                   "Ghost.","Lord.","","","","Sailor.","Mess.","Servant."]
+CHARACTERS_SHORT = ["King", "Ham", "Pol", "Hor", "Laer", "Volt", "Cor", "Ros", "Guil", "Osr", "Gent", "Priest",
+                   "Mar","Ber","Fran","Rey","1 Play", "Clown", "Fort","Capt","Ambassador","Queen","Oph",
+                   "Ghost","Lord","","","","Sailor","Mess","Servant"]
 
 OTHER_BAD_WORDS = ["Enter", "Scene", "Exeunt", "Flourish", "Exit"]
 
@@ -69,7 +69,7 @@ def indexMaxAndMinAllLines(fileName):
 def processHumanSpeech(speech, maxLength, minLength):
     processedSpeech = speech
     if len(speech) >= maxLength/2:
-        processedSpeech = speech[-(minLength + 10):]
+        processedSpeech = speech[-(minLength + 20):]
     if speech[-1:] == " ":
         processedSpeech = speech[0:len(speech) - 1]
     return processedSpeech
@@ -85,7 +85,7 @@ def respond(currentCharacter, previousLine, charactersShort):
         currentLine = ' '.join(currentLine)
         if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
-            for index2 in range(prevLineNumber + 1, len(allLines)-1):
+            for index2 in range(prevLineNumber + 1, len(allLines)):
                 if firstWords[index2] not in charactersShort and firstWords[index2] not in OTHER_BAD_WORDS:
                     responseLine = allLines[index2]
                     responseLine = ' '.join(responseLine)
@@ -125,6 +125,13 @@ def recognizeSpeech():
 
     return humanInput
 
+def postProcessHumanSpeech(speech):
+    postProcessed = ""
+    for char in speech:
+        if char not in string.punctuation:
+            postProcessed += char
+    return postProcessed
+
 
 allLines, firstWords, maxLength, minLength = indexMaxAndMinAllLines(FILE_NAME)
 
@@ -134,5 +141,8 @@ print("Human input: ", humanInput)
 processed = processHumanSpeech(humanInput, maxLength, minLength)
 print("Processed: ", processed)
 
-respondString = respond("Ber.", processed, CHARACTERS_SHORT)
+postProcessed = postProcessHumanSpeech(processed)
+print("Post processed", postProcessed)
+
+respondString = respond("Hor", postProcessed, CHARACTERS_SHORT)
 print(respondString)
