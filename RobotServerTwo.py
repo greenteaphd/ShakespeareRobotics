@@ -1,41 +1,21 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
 # COMP 380 - Robotics Project
 # April 15th, 2018
-# Sets up the server for the robot and allows the robot to know which line to say back.
+# Sets up the second server for the robot and allows the robot to know which line to say back.
 
 import socket
 import ev3dev.ev3 as ev3
 import string
 
+CHARACTERS_FULL = ["Nikhil", "Joweina", "Andy"]
 
-###
-# Static variables needed for respond() function
-#   CHARACTERS_FULL is a list of all of the characters in Hamlet and their full names as listed in the Dramatis Personae
-#   CHARACTERS_SHORT is a list of all of the characters in Hamlet and their shortened names as seen in the play's script
-#   OTHER_BAD_WORDS is a list of words to ignore when creating a response
-#   FILE is the read-only representation of Hamlet.txt
-###
+CHARACTERS_SHORT = ["Nick", "Jo", "Andy"]
 
-CHARACTERS_FULL = ["Claudius", "Hamlet", "Polonius", "Horatio", "Laertes", "Voltemand", "Cornelius", "Rosencrantz",
-                  "Guildenstern","Osric","Gentleman","Priest","Marcellus","Bernardo","Francisco","Reynaldo",
-                  "Players", "Two Clowns", "Fortinbras", "Norwegian Captain", "English Ambassador", "Gertrude",
-                  "Ophelia","Ghost of Hamlet's Father","Lord","Lady","Officer","Solider","Sailor","Messenger","Attendant"]
+OTHER_BAD_WORDS = ["Enter", "Scene"]
 
-CHARACTERS_SHORT = ["King", "Ham.", "Pol.", "Hor.", "Laer.", "Volt.", "Cor.", "Ros.", "Guil.", "Osr.", "Gent.", "Priest.",
-                   "Mar.","Ber.","Fran.","Rey.","1. Play.", "Clown.", "Fort.","Capt.","Ambassador.","Queen.","Oph.",
-                   "Ghost.","Lord.","","","","Sailor.","Mess.","Servant."]
-
-OTHER_BAD_WORDS = ["Enter", "Scene", "Exeunt", "Flourish", "Exit"]
-
-FILE_NAME = "Hamlet.txt"
-
-###
-# Methods used to generate the correct response to a given line in the play
-###
-
+FILE_NAME = "WorkProblems.txt"
 
 def removePunctuation(words):
-    """ Removes punctuation from a string """
     newWords = []
     for word in words:
         resultString = ""
@@ -45,34 +25,41 @@ def removePunctuation(words):
         newWords.append(resultString)
     return newWords
 
-def indexMaxAndMinAllLines(fileName):
+def indexAllLines(fileName):
     """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
     representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
     match up with the ones in Hamlet.txt because it skips over blank lines. """
     file = open(fileName, "r")
-    lengths = []
     allLines = []
     firstWords = []
     for currentLine in file:
-        if len(currentLine) > 1:
-            length = len(currentLine)
-            lengths.append(length)
         words = currentLine.split()
         if len(words) > 0:
             firstWord = words[0]
             firstWords.append(firstWord)
             words = removePunctuation(words)
             allLines.append(words)
-    #print(lengths)
+    file.close()
+    return allLines, firstWords
+
+
+def maxAndMinLines(fileName):
+    file = open(fileName, "r")
+    lengths = []
+    for currentLine in file:
+        if len(currentLine) > 1:
+            length = len(currentLine)
+            lengths.append(length)
     maxLength = max(lengths)
     minLength = min(lengths)
     file.close()
-    return allLines, firstWords, maxLength, minLength
+    return maxLength, minLength
+
 
 def respond(currentCharacter, previousLine, charactersShort):
     """ respond() is the main part of the algorithm for the robot's response.
     It returns a string with the lines following a part of a given previous line """
-    allLines, firstWords, maxLength, minLength = indexMaxAndMinAllLines(FILE_NAME)
+    allLines, firstWords = indexAllLines(FILE_NAME)
     respondString = ""
     charactersShort.remove(currentCharacter)
     for index1 in range(0, len(allLines)-1):
@@ -80,8 +67,8 @@ def respond(currentCharacter, previousLine, charactersShort):
         currentLine = ' '.join(currentLine)
         if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
-            for index2 in range(prevLineNumber + 1, len(allLines)-1):
-                if firstWords[index2] not in charactersShort and firstWords[index2] not in OTHER_BAD_WORDS:
+            for index2 in range(prevLineNumber + 1, len(allLines)):
+                if (firstWords[index2] not in charactersShort) and (firstWords[index2] not in OTHER_BAD_WORDS):
                     responseLine = allLines[index2]
                     responseLine = ' '.join(responseLine)
                     respondString = respondString + responseLine + "\n"
@@ -89,15 +76,34 @@ def respond(currentCharacter, previousLine, charactersShort):
                     break
     return respondString
 
+
+def processHumanSpeech(speech, maxLength, minLength):
+    processedSpeech = speech
+    if len(speech) >= maxLength/2:
+        processedSpeech = speech[-minLength:]
+    if speech[-1:] == " ":
+        processedSpeech = speech[0:len(speech) - 1]
+    return processedSpeech
+
+
+def postProcessHumanSpeech(speech):
+    postProcessed = ""
+    for char in speech:
+        if char not in string.punctuation:
+            postProcessed += char
+    return postProcessed
+
+
 def test_method(string_input):
     """ Tests the server_main method to see if the data was sent correctly. """
-    response_string = respond("Ber.", string_input, CHARACTERS_SHORT)
+    response_string = respond("Nick", string_input, CHARACTERS_SHORT)
     print(response_string)
 
     print("The client sent: " + string_input)
     ev3.Sound.set_volume(100)
     ev3.Sound.speak(response_string, espeak_opts= '-a 200 -s 130 -v "hi" -g 7 -k 20')
     print(response_string)
+
 
 def server_main(server_address):
     """ This method receives the message sent by the client. """
@@ -114,4 +120,3 @@ def server_main(server_address):
         conn.close()
 
 server_main("169.254.55.85")  # Note that the IP of the robot will change each time a connection is made via Bluetooth
-
