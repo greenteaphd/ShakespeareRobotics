@@ -39,19 +39,15 @@ CURRENT_CHARACTER = "Ber."
 # Methods used to generate the correct response to a given line in the play
 ###
 
-
-def removePunctuation(words):
+def removePunctuation(inputString):
     """ Removes punctuation from a string """
-    newWords = []
-    for word in words:
-        resultString = ""
-        for char in word:
-            if char not in string.punctuation:
-                resultString += char
-        newWords.append(resultString)
-    return newWords
+    newString = inputString
+    for char in inputString:
+        if char not in string.punctuation:
+            newString += char
+    return newString
 
-def indexMaxAndMinAllLines(fileName):
+def indexLines(fileName):
     """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
     representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
     match up with the ones in Hamlet.txt because it skips over blank lines. """
@@ -67,23 +63,20 @@ def indexMaxAndMinAllLines(fileName):
         if len(words) > 0:
             firstWord = words[0]
             firstWords.append(firstWord)
-            words = removePunctuation(words)
             allLines.append(words)
-    #print(lengths)
-    maxLength = max(lengths)
-    minLength = min(lengths)
     file.close()
-    return allLines, firstWords, maxLength, minLength
+    return allLines, firstWords
 
 def respond(currentCharacter, previousLine, charactersShort):
     """ respond() is the main part of the algorithm for the robot's response.
     It returns a string with the lines following a part of a given previous line """
-    allLines, firstWords, maxLength, minLength = indexMaxAndMinAllLines(FILE_NAME)
+    allLines, firstWords = indexLines(FILE_NAME)
     respondString = ""
     charactersShort.remove(currentCharacter)
     for index1 in range(0, len(allLines)-1):
         currentLine = allLines[index1]
         currentLine = ' '.join(currentLine)
+        currentLine = removePunctuation(currentLine)
         if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
             for index2 in range(prevLineNumber + 1, len(allLines)-1):

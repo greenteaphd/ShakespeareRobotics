@@ -21,15 +21,13 @@ FILE_NAME = "WorkProblems.txt"
 CURRENT_CHARACTER = "Nick"
 
 
-def removePunctuation(words):
-    newWords = []
-    for word in words:
-        resultString = ""
-        for char in word:
-            if char not in string.punctuation:
-                resultString += char
-        newWords.append(resultString)
-    return newWords
+def removePunctuation(inputString):
+    """ Removes punctuation from a string """
+    newString = inputString
+    for char in inputString:
+        if char not in string.punctuation:
+            newString += char
+    return newString
 
 def indexAllLines(fileName):
     """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
@@ -65,16 +63,17 @@ def maxAndMinLines(fileName):
 def respond(currentCharacter, previousLine, charactersShort):
     """ respond() is the main part of the algorithm for the robot's response.
     It returns a string with the lines following a part of a given previous line """
-    allLines, firstWords = indexAllLines(FILE_NAME)
+    allLines, firstWords = indexLines(FILE_NAME)
     respondString = ""
     charactersShort.remove(currentCharacter)
     for index1 in range(0, len(allLines)-1):
         currentLine = allLines[index1]
         currentLine = ' '.join(currentLine)
+        currentLine = removePunctuation(currentLine)
         if previousLine.lower() in currentLine.lower():
             prevLineNumber = index1
-            for index2 in range(prevLineNumber + 1, len(allLines)):
-                if (firstWords[index2] not in charactersShort) and (firstWords[index2] not in OTHER_BAD_WORDS):
+            for index2 in range(prevLineNumber + 1, len(allLines)-1):
+                if firstWords[index2] not in charactersShort and firstWords[index2] not in OTHER_BAD_WORDS:
                     responseLine = allLines[index2]
                     responseLine = ' '.join(responseLine)
                     respondString = respondString + responseLine + "\n"

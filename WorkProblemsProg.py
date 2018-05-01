@@ -9,15 +9,13 @@ OTHER_BAD_WORDS = ["Enter", "Scene"]
 
 FILE_NAME = "WorkProblems.txt"
 
-def removePunctuation(words):
-    newWords = []
-    for word in words:
-        resultString = ""
-        for char in word:
-            if char not in string.punctuation:
-                resultString += char
-        newWords.append(resultString)
-    return newWords
+def removePunctuation(inputString):
+    """ Removes punctuation from a string """
+    newString = inputString
+    for char in inputString:
+        if char not in string.punctuation:
+            newString += char
+    return newString
 
 def indexAllLines(fileName):
     """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
@@ -50,25 +48,25 @@ def maxAndMinLines(fileName):
     return maxLength, minLength
 
 
-def respond(currentCharacter, previousLine, charactersShort):
-    """ respond() is the main part of the algorithm for the robot's response.
-    It returns a string with the lines following a part of a given previous line """
-    allLines, firstWords = indexAllLines(FILE_NAME)
-    respondString = ""
-    charactersShort.remove(currentCharacter)
-    for index1 in range(0, len(allLines)-1):
-        currentLine = allLines[index1]
-        currentLine = ' '.join(currentLine)
-        if previousLine.lower() in currentLine.lower():
-            prevLineNumber = index1
-            for index2 in range(prevLineNumber + 1, len(allLines)):
-                if (firstWords[index2] not in charactersShort) and (firstWords[index2] not in OTHER_BAD_WORDS):
-                    responseLine = allLines[index2]
-                    responseLine = ' '.join(responseLine)
-                    respondString = respondString + responseLine + "\n"
-                elif firstWords[index2] in charactersShort:
-                    break
-    return respondString
+def indexLines(fileName):
+    """ indexAllLines is a helper function to respond(). It creates two lists: allLines and firstWords, which contains a list
+    representation of either an entire line of the play, or simply the first word in a given line. These indexes do not
+    match up with the ones in Hamlet.txt because it skips over blank lines. """
+    file = open(fileName, "r")
+    lengths = []
+    allLines = []
+    firstWords = []
+    for currentLine in file:
+        if len(currentLine) > 1:
+            length = len(currentLine)
+            lengths.append(length)
+        words = currentLine.split()
+        if len(words) > 0:
+            firstWord = words[0]
+            firstWords.append(firstWord)
+            allLines.append(words)
+    file.close()
+    return allLines, firstWords
 
 
 def processHumanSpeech(speech, maxLength, minLength):
@@ -87,6 +85,26 @@ def postProcessHumanSpeech(speech):
             postProcessed += char
     return postProcessed
 
+def respond(currentCharacter, previousLine, charactersShort):
+    """ respond() is the main part of the algorithm for the robot's response.
+    It returns a string with the lines following a part of a given previous line """
+    allLines, firstWords = indexLines(FILE_NAME)
+    respondString = ""
+    charactersShort.remove(currentCharacter)
+    for index1 in range(0, len(allLines)-1):
+        currentLine = allLines[index1]
+        currentLine = ' '.join(currentLine)
+        currentLine = removePunctuation(currentLine)
+        if previousLine.lower() in currentLine.lower():
+            prevLineNumber = index1
+            for index2 in range(prevLineNumber + 1, len(allLines)-1):
+                if firstWords[index2] not in charactersShort and firstWords[index2] not in OTHER_BAD_WORDS:
+                    responseLine = allLines[index2]
+                    responseLine = ' '.join(responseLine)
+                    respondString = respondString + responseLine + "\n"
+                elif firstWords[index2] in charactersShort:
+                    break
+    return respondString
 
 def recognizeSpeech():
     """ Function that handles the transcription of audio into text via Google Speech API """
