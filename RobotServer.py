@@ -29,6 +29,12 @@ OTHER_BAD_WORDS = ["Enter", "Scene", "Exeunt", "Flourish", "Exit"]
 
 FILE_NAME = "Hamlet.txt"
 
+
+###
+# PLEASE DOUBLE CHECK THis INPUT PARAMETER BEFORE RUNNING THE PROGRAM.
+###
+CURRENT_CHARACTER = "Ber."
+
 ###
 # Methods used to generate the correct response to a given line in the play
 ###
@@ -91,7 +97,7 @@ def respond(currentCharacter, previousLine, charactersShort):
 
 def test_method(string_input):
     """ Tests the server_main method to see if the data was sent correctly. """
-    response_string = respond("Ber.", string_input, CHARACTERS_SHORT)
+    response_string = respond(CURRENT_CHARACTER, string_input, CHARACTERS_SHORT)
     print(response_string)
 
     print("The client sent: " + string_input)

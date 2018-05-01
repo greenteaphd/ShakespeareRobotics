@@ -15,6 +15,12 @@ OTHER_BAD_WORDS = ["Enter", "Scene"]
 
 FILE_NAME = "WorkProblems.txt"
 
+###
+# PLEASE DOUBLE CHECK THis INPUT PARAMETER BEFORE RUNNING THE PROGRAM.
+###
+CURRENT_CHARACTER = "Nick"
+
+
 def removePunctuation(words):
     newWords = []
     for word in words:
@@ -96,7 +102,7 @@ def postProcessHumanSpeech(speech):
 
 def test_method(string_input):
     """ Tests the server_main method to see if the data was sent correctly. """
-    response_string = respond("Nick", string_input, CHARACTERS_SHORT)
+    response_string = respond(CURRENT_CHARACTER, string_input, CHARACTERS_SHORT)
     print(response_string)
 
     print("The client sent: " + string_input)
