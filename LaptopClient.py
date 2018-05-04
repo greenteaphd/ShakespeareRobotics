@@ -17,16 +17,17 @@ import string
 FILE_NAME1 = "Hamlet.txt"
 FILE_NAME2 = "WorkProblems.txt"
 
+
 ###
 # PLEASE SET UP THE CORRESPONDING STATIC VARIABLES ACCORDING TO WHATEVER PLAY YOU WANT TO WORK WITH!!
 ###
 
 FILE_NAME = FILE_NAME2  # Setting this to run the Troubles at Work Play called WorkProblems.txt
 
+
 ###
 # Helper functions used to recognize and process human speech data
 ###
-
 
 def recognizeSpeechWithAPI():
     """ Function that handles the transcription of audio into text via Google Speech API """
@@ -102,6 +103,7 @@ def postProcessHumanSpeech(speech):
             postProcessed += char
     return postProcessed
 
+
 ###
 # The following functions detail what LaptopClient as a class does. It is responsible
 # for working with the Google Speech API to recognize speech, process it, and then
@@ -111,7 +113,6 @@ def postProcessHumanSpeech(speech):
 # The robot is in charge of listening to the laptop and whatever data it sends over,
 # while the laptop is in charge of sending and processing that data to the robot.
 ###
-
 
 def client_main(server_address):
     """ This method takes in a server address in order to send data to the server. """

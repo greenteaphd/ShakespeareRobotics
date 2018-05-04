@@ -8,6 +8,7 @@ import socket
 import ev3dev.ev3 as ev3
 import string
 
+
 ###
 # Static variables needed for respond() function
 #   CHARACTERS_FULL is a list of all of the characters in the Troubles at Work play
@@ -24,10 +25,12 @@ OTHER_BAD_WORDS = ["Enter", "Scene"]
 
 FILE_NAME = "WorkProblems.txt"
 
+
 ###
 # PLEASE DOUBLE CHECK THIS INPUT PARAMETER BEFORE RUNNING THE PROGRAM.
 ###
 CURRENT_CHARACTER = "Jo"
+
 
 ###
 # Methods used to generate the correct response to a given line in the play

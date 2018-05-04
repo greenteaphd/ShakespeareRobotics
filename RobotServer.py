@@ -8,6 +8,7 @@ import socket
 import ev3dev.ev3 as ev3
 import string
 
+
 ###
 # Static variables needed for respond() function
 #   CHARACTERS_FULL is a list of all of the characters in Hamlet and their full names as listed in the Dramatis Personae
@@ -34,6 +35,7 @@ FILE_NAME = "Hamlet.txt"
 # PLEASE DOUBLE CHECK THIS INPUT PARAMETER BEFORE RUNNING THE PROGRAM.
 ###
 CURRENT_CHARACTER = "Ber."
+
 
 ###
 # Methods used to generate the correct response to a given line in the play
