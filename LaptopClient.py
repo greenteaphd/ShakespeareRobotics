@@ -130,6 +130,6 @@ def client_main(server_address):
     return
 
 if __name__ == "__main__":
-    client_main("169.254.205.71")  # This address will change each time the laptop connects to the robot.
+    client_main("169.254.195.183")  # This address will change each time the laptop connects to the robot.
 
 
