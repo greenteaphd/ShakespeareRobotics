@@ -1,11 +1,11 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
 # COMP 380 - Robotics Project
-# April 26th, 2018
+# May 5th, 2018
 # This is the file that sets up the client on the computer which the data is being sent from
 
 # Import statements
 import socket
-import speech_recognition as sr
+import speech_recognition as sr  # A lot of libraries have been installed to make this happen!
 import string
 
 
@@ -19,10 +19,9 @@ FILE_NAME2 = "WorkProblems.txt"
 
 ###
 # PLEASE SET UP THE CORRESPONDING STATIC VARIABLES ACCORDING TO WHATEVER PLAY YOU WANT TO WORK WITH!!
-#TODO: could make this based on user input to make it prettier
 ###
 
-FILE_NAME = FILE_NAME2
+FILE_NAME = FILE_NAME2  # Setting this to run the Troubles at Work Play called WorkProblems.txt
 
 ###
 # Helper functions used to recognize and process human speech data
@@ -97,7 +96,6 @@ def processHumanSpeech(speech, maxLength, minLength):
 def postProcessHumanSpeech(speech):
     """ postProcessHumanSpeech() gets rid of punctuation in the human input string. Mostly, this comes into
      play when there are contractions like "don't" in the human speech input. Otherwise, this does nothing. """
-    #TODO: fix this so that it only does it if it has an apostrophe in the line
     postProcessed = ""
     for char in speech:
         if char not in string.punctuation:
@@ -109,10 +107,11 @@ def postProcessHumanSpeech(speech):
 # for working with the Google Speech API to recognize speech, process it, and then
 # send it to the robot to interpret/respond.
 #
-# We've established the relationship between the robot and the laptop as a server-client model.
-# The robot is charge of listening to the laptop and whatever data it sends over,
+# We've established the relationship between the robot and the laptop as a client-server model.
+# The robot is in charge of listening to the laptop and whatever data it sends over,
 # while the laptop is in charge of sending and processing that data to the robot.
 ###
+
 
 def client_main(server_address):
     """ This method takes in a server address in order to send data to the server. """
@@ -120,7 +119,7 @@ def client_main(server_address):
     humanInput = recognizeSpeechWithAPI()
     processed = processHumanSpeech(humanInput, maxLength, minLength)
     postProcessed = postProcessHumanSpeech(processed)
-    data = postProcessed.encode()
+    data = postProcessed.encode()  # so that the data can be sent via Bluetooth
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((server_address, 7000))
@@ -130,6 +129,6 @@ def client_main(server_address):
     return
 
 if __name__ == "__main__":
-    client_main("169.254.55.85")
+    client_main("169.254.205.71")  # This address will change each time the laptop connects to the robot.
 
 

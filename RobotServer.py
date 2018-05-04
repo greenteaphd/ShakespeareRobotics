@@ -1,12 +1,12 @@
 # Andy Han, Joweina Hsiao, and Nikhil Smith
 # COMP 380 - Robotics Project
-# April 15th, 2018
+# May 5th, 2018
 # Sets up the server for the robot and allows the robot to know which line to say back.
+# This program is specific to the Hamlet play.
 
 import socket
 import ev3dev.ev3 as ev3
 import string
-
 
 ###
 # Static variables needed for respond() function
@@ -31,7 +31,7 @@ FILE_NAME = "Hamlet.txt"
 
 
 ###
-# PLEASE DOUBLE CHECK THis INPUT PARAMETER BEFORE RUNNING THE PROGRAM.
+# PLEASE DOUBLE CHECK THIS INPUT PARAMETER BEFORE RUNNING THE PROGRAM.
 ###
 CURRENT_CHARACTER = "Ber."
 
