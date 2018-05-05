@@ -88,7 +88,10 @@ def respond(currentCharacter, previousLine, charactersShort):
                     respondString = respondString + responseLine + "\n"
                 elif firstWords[index2] in charactersShort:
                     break
+    respondString = respondString[len(currentCharacter):]
+    charactersShort.append(currentCharacter)
     return respondString
+
 
 def test_method(string_input):
     """ Tests the server_main method to see if the data was sent correctly. """
@@ -115,4 +118,3 @@ def server_main(server_address):
         conn.close()
 
 server_main("169.254.55.85")  # Note that the IP of the robot will change each time a connection is made via Bluetooth
-

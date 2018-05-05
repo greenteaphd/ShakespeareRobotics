@@ -83,7 +83,7 @@ def respond(currentCharacter, previousLine, charactersShort):
                     respondString = respondString + responseLine + "\n"
                 elif firstWords[index2] in charactersShort:
                     break
-    respondString = respondString[2:]
+    respondString = respondString[len(currentCharacter):]
     charactersShort.append(currentCharacter)
     return respondString
 
